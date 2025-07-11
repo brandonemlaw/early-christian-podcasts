@@ -29,6 +29,7 @@ $(document).ready(function() {
         initializeSlider();
         updateTimelineUI();
         updateUIControls();
+        updateDynamicBackground(appState.currentYear);
         checkTimelineProgress();
         
         // Don't auto-restore podcast on page load
@@ -40,8 +41,9 @@ $(document).ready(function() {
         $('.perspective-btn').removeClass('active');
         $(`.perspective-btn[data-perspective="${appState.datePerspective}"]`).addClass('active');
         
-        // Set the sort selector
-        $('#sortBy').val(appState.sortBy);
+        // Set the sort buttons
+        $('.sort-btn').removeClass('active');
+        $(`.sort-btn[data-sort="${appState.sortBy}"]`).addClass('active');
     }
 
     function loadStateFromStorage() {
@@ -96,11 +98,37 @@ $(document).ready(function() {
             filterPodcastsByYear();
         });
         
-        // Sort selector
-        $('#sortBy').on('change', function() {
-            appState.sortBy = $(this).val();
+        // Sort buttons
+        $('.sort-btn').on('click', function() {
+            const sortBy = $(this).data('sort');
+            appState.sortBy = sortBy;
+            
+            // Update button states
+            $('.sort-btn').removeClass('active');
+            $(this).addClass('active');
+            
             saveStateToStorage();
             renderPodcasts();
+        });
+        
+        // Remove old dropdown handlers
+        // Custom dropdown handlers
+        $('#dropdownSelected').on('click', function(e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+        
+        $('.dropdown-option').on('click', function() {
+            const value = $(this).data('value');
+            const text = $(this).text();
+            selectDropdownOption(value, text);
+        });
+        
+        // Close dropdown when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.custom-dropdown').length) {
+                closeDropdown();
+            }
         });
         
         // Timeline play button - dynamic handler
@@ -165,6 +193,46 @@ $(document).ready(function() {
         });
     }
 
+    function toggleDropdown() {
+        const options = $('#dropdownOptions');
+        const selected = $('#dropdownSelected');
+        const arrow = $('#dropdownArrow');
+        
+        if (options.hasClass('active')) {
+            closeDropdown();
+        } else {
+            options.addClass('active');
+            selected.addClass('active');
+            arrow.addClass('active');
+        }
+    }
+
+    function closeDropdown() {
+        $('#dropdownOptions').removeClass('active');
+        $('#dropdownSelected').removeClass('active');
+        $('#dropdownArrow').removeClass('active');
+    }
+
+    function selectDropdownOption(value, text) {
+        // Update the visual display
+        $('#dropdownSelected .dropdown-text').text(text);
+        
+        // Update the hidden select
+        $('#sortBy').val(value);
+        
+        // Update option states
+        $('.dropdown-option').removeClass('selected');
+        $(`.dropdown-option[data-value="${value}"]`).addClass('selected');
+        
+        // Close dropdown
+        closeDropdown();
+        
+        // Update app state and re-render
+        appState.sortBy = value;
+        saveStateToStorage();
+        renderPodcasts();
+    }
+
     function initializeSlider() {
         $("#year-slider").slider({
             range: "min",
@@ -187,8 +255,131 @@ $(document).ready(function() {
         appState.currentYear = year;
         $('.current-year').text(year);
         $("#year-slider").slider("value", year);
+        updateDynamicBackground(year);
         filterPodcastsByYear();
         saveStateToStorage();
+    }
+
+    function updateDynamicBackground(year) {
+        // Calculate progress from 32 AD to 432 AD (400 years total)
+        const startYear = 32;
+        const endYear = 432;
+        const totalYears = endYear - startYear;
+        const progress = Math.max(0, Math.min(1, (year - startYear) / totalYears));
+        
+        // Convert to actual year breakpoints
+        const preDawnPoint = 50; // Pre-dawn (dark period)
+        const dawnPoint = 120; // Dawn/sunrise
+        const middayPoint = 170; // Deep sky/midday  
+        const skyBluePoint = 320; // Sky blue
+        const overcastPoint = 550; // Overcast (extends past 432)
+        
+        let gradient;
+        let backgroundBrightness = 0; // 0 = dark, 1 = light
+        
+        if (year <= preDawnPoint) {
+            // Pre-dawn: Very subtle shift in dark colors
+            const localProgress = Math.max(0, Math.min(1, (year - startYear) / (preDawnPoint - startYear)));
+            gradient = `linear-gradient(135deg, 
+                ${interpolateColor('#1a1a2e', '#2a1b3d', localProgress)} 0%, 
+                ${interpolateColor('#16213e', '#1f2742', localProgress)} 25%, 
+                ${interpolateColor('#0f3460', '#1a3a65', localProgress)} 50%, 
+                ${interpolateColor('#533483', '#5e3a8a', localProgress)} 75%, 
+                ${interpolateColor('#7209b7', '#7c2d92', localProgress)} 100%)`;
+            backgroundBrightness = 0.1 + (localProgress * 0.1); // Very dark
+        } else if (year <= dawnPoint) {
+            // Dark to Peach (pre-dawn to dawn)
+            const localProgress = (year - preDawnPoint) / (dawnPoint - preDawnPoint);
+            gradient = `linear-gradient(135deg, 
+                ${interpolateColor('#2a1b3d', '#ffb38a', localProgress)} 0%, 
+                ${interpolateColor('#1f2742', '#ffa366', localProgress)} 25%, 
+                ${interpolateColor('#1a3a65', '#ff9a56', localProgress)} 50%, 
+                ${interpolateColor('#5e3a8a', '#ff8c42', localProgress)} 75%, 
+                ${interpolateColor('#7c2d92', '#ff7c33', localProgress)} 100%)`;
+            backgroundBrightness = 0.2 + (localProgress * 0.3); // Dark to medium
+        } else if (year <= middayPoint) {
+            // Peach to Deep Blue (sunrise to deep sky)
+            const localProgress = (year - dawnPoint) / (middayPoint - dawnPoint);
+            gradient = `linear-gradient(135deg, 
+                ${interpolateColor('#ffb38a', '#1e3a8a', localProgress)} 0%, 
+                ${interpolateColor('#ffa366', '#1e40af', localProgress)} 25%, 
+                ${interpolateColor('#ff9a56', '#2563eb', localProgress)} 50%, 
+                ${interpolateColor('#ff8c42', '#3b82f6', localProgress)} 75%, 
+                ${interpolateColor('#ff7c33', '#60a5fa', localProgress)} 100%)`;
+            backgroundBrightness = 0.5 + (localProgress * 0.2); // Medium to bright
+        } else if (year <= skyBluePoint) {
+            // Deep Blue to Sky Blue (midday to afternoon)
+            const localProgress = (year - middayPoint) / (skyBluePoint - middayPoint);
+            gradient = `linear-gradient(135deg, 
+                ${interpolateColor('#1e3a8a', '#0ea5e9', localProgress)} 0%, 
+                ${interpolateColor('#1e40af', '#38bdf8', localProgress)} 25%, 
+                ${interpolateColor('#2563eb', '#7dd3fc', localProgress)} 50%, 
+                ${interpolateColor('#3b82f6', '#bae6fd', localProgress)} 75%, 
+                ${interpolateColor('#60a5fa', '#e0f2fe', localProgress)} 100%)`;
+            backgroundBrightness = 0.7 + (localProgress * 0.2); // Bright to very bright
+        } else {
+            // Sky Blue to Light Blue/Grey (afternoon to overcast)
+            const localProgress = Math.min(1, (year - skyBluePoint) / (overcastPoint - skyBluePoint));
+            gradient = `linear-gradient(135deg, 
+                ${interpolateColor('#0ea5e9', '#cbd5e1', localProgress)} 0%, 
+                ${interpolateColor('#38bdf8', '#e2e8f0', localProgress)} 25%, 
+                ${interpolateColor('#7dd3fc', '#f1f5f9', localProgress)} 50%, 
+                ${interpolateColor('#bae6fd', '#f8fafc', localProgress)} 75%, 
+                ${interpolateColor('#e0f2fe', '#f0f9ff', localProgress)} 100%)`;
+            backgroundBrightness = 0.9 + (localProgress * 0.1); // Very bright
+        }
+        
+        // Update dynamic gradient
+        document.documentElement.style.setProperty('--dynamic-gradient', gradient);
+        
+        // Update frost colors based on background brightness
+        updateFrostColors(backgroundBrightness);
+    }
+
+    function updateFrostColors(brightness) {
+        // Invert the frost opacity - darker background = lighter frost, lighter background = darker frost
+        const frostOpacity = Math.max(0.05, Math.min(0.25, 0.25 - (brightness * 0.15)));
+        const borderOpacity = Math.max(0.1, Math.min(0.5, 0.5 - (brightness * 0.35)));
+        const backdropOpacity = Math.max(0.08, Math.min(0.35, 0.35 - (brightness * 0.25)));
+        
+        // For very bright backgrounds, use much darker frost
+        if (brightness > 0.8) {
+            document.documentElement.style.setProperty('--frost-color', `rgba(0, 0, 0, ${frostOpacity * 1.8})`);
+            document.documentElement.style.setProperty('--frost-border', `rgba(0, 0, 0, ${borderOpacity * 1.5})`);
+            document.documentElement.style.setProperty('--frost-backdrop', `rgba(0, 0, 0, ${backdropOpacity * 1.6})`);
+        } else {
+            // For darker backgrounds, use white frost
+            document.documentElement.style.setProperty('--frost-color', `rgba(255, 255, 255, ${frostOpacity})`);
+            document.documentElement.style.setProperty('--frost-border', `rgba(255, 255, 255, ${borderOpacity})`);
+            document.documentElement.style.setProperty('--frost-backdrop', `rgba(255, 255, 255, ${backdropOpacity})`);
+        }
+    }
+
+    function interpolateColor(color1, color2, factor) {
+        // Convert hex colors to RGB
+        const hex1 = color1.replace('#', '');
+        const hex2 = color2.replace('#', '');
+        
+        const r1 = parseInt(hex1.substr(0, 2), 16);
+        const g1 = parseInt(hex1.substr(2, 2), 16);
+        const b1 = parseInt(hex1.substr(4, 2), 16);
+        
+        const r2 = parseInt(hex2.substr(0, 2), 16);
+        const g2 = parseInt(hex2.substr(2, 2), 16);
+        const b2 = parseInt(hex2.substr(4, 2), 16);
+        
+        // Interpolate
+        const r = Math.round(r1 + (r2 - r1) * factor);
+        const g = Math.round(g1 + (g2 - g1) * factor);
+        const b = Math.round(b1 + (b2 - b1) * factor);
+        
+        // Convert back to hex
+        const toHex = (n) => {
+            const hex = n.toString(16);
+            return hex.length === 1 ? '0' + hex : hex;
+        };
+        
+        return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     }
 
     function loadPodcasts() {
@@ -921,15 +1112,15 @@ $(document).ready(function() {
         
         sortedPodcasts.forEach(podcast => {
             const isCurrentlyPlaying = appState.currentPodcast && 
-                                     appState.currentPodcast.id === podcast.id &&
-                                     appState.currentPodcast.versionId === podcast.versionId;
+                             appState.currentPodcast.id === podcast.id &&
+                             appState.currentPodcast.versionId === podcast.versionId;
             
             const badgeHtml = podcast.badge ? `<span class="badge ${podcast.badge}">${podcast.badge}</span>` : '';
             const canonBadge = podcast.isCanon ? `<span class="badge canon">Canon</span>` : '';
             const playingClass = isCurrentlyPlaying ? 'playing' : '';
             
-            // Create combined author and date display for alternative perspectives
-            const alternativeDisplay = createAlternativeDisplay(podcast.authors, podcast.dates, appState.datePerspective);
+            // Create compact alternative display for other perspectives
+            const alternativeDisplay = createCompactAlternativeDisplay(podcast.authors, podcast.dates, appState.datePerspective);
             
             const card = $(`
                 <div class="podcast-card ${playingClass}" data-id="${podcast.id}" data-version-id="${podcast.versionId}">
@@ -942,6 +1133,7 @@ $(document).ready(function() {
                         <div class="podcast-authorship">
                             <div class="primary-info">
                                 <span class="primary-author">${podcast.primaryAuthor}</span>
+                                <span class="date-separator">•</span>
                                 <span class="primary-date">${podcast.primaryDate} AD</span>
                             </div>
                             <div class="alternative-info">
@@ -949,10 +1141,10 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <p class="podcast-description">${podcast.description}</p>
-                        <div class="podcast-meta">
-                            <span class="podcast-duration">${formatTime(podcast.duration)}</span>
-                        </div>
                         ${podcast.versionNote ? `<p class="version-note">${podcast.versionNote}</p>` : ''}
+                    </div>
+                    <div class="podcast-meta">
+                        <span class="podcast-duration">${formatTime(podcast.duration)}</span>
                     </div>
                 </div>
             `);
@@ -972,14 +1164,14 @@ $(document).ready(function() {
         });
     }
     
-    function createAlternativeDisplay(authors, dates, primaryPerspective) {
+    function createCompactAlternativeDisplay(authors, dates, primaryPerspective) {
         const perspectives = ['scholarly', 'moderate', 'traditional'];
         const otherPerspectives = perspectives.filter(p => p !== primaryPerspective);
         
         return otherPerspectives.map(perspective => {
             const label = perspective.charAt(0).toUpperCase() + perspective.slice(1);
             return `<span class="alt-perspective">${label}: ${authors[perspective]} • ${dates[perspective]} AD</span>`;
-        }).join('<br>');
+        }).join('');
     }
 
     function selectPodcast(podcast) {

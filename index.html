@@ -40,22 +40,32 @@
 
         <!-- Controls Section -->
         <section class="controls-section">
-            <div class="perspective-control">
-                <label>Dating Perspective:</label>
-                <div class="button-group" id="perspectiveButtons">
-                    <button class="perspective-btn active" data-perspective="scholarly">Scholarly</button>
-                    <button class="perspective-btn" data-perspective="moderate">Moderate</button>
-                    <button class="perspective-btn" data-perspective="traditional">Traditional</button>
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Dating Perspective</label>
+                    <div class="button-group" id="perspectiveButtons">
+                        <button class="perspective-btn active" data-perspective="scholarly">Scholarly</button>
+                        <button class="perspective-btn" data-perspective="moderate">Moderate</button>
+                        <button class="perspective-btn" data-perspective="traditional">Traditional</button>
+                    </div>
                 </div>
-            </div>
-            <div class="sort-control">
-                <label for="sortBy">Sort by:</label>
-                <select id="sortBy">
-                    <option value="newest">Newest First</option>
-                    <option value="oldest">Oldest First</option>
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                </select>
+                <div class="control-group">
+                    <label>Sort By</label>
+                    <div class="button-group" id="sortButtons">
+                        <button class="sort-btn active" data-sort="newest" title="Newest First">
+                            <i class="fas fa-arrow-down-9-1"></i>
+                        </button>
+                        <button class="sort-btn" data-sort="oldest" title="Oldest First">
+                            <i class="fas fa-arrow-up-1-9"></i>
+                        </button>
+                        <button class="sort-btn" data-sort="title" title="Sort by Title">
+                            <i class="fas fa-sort-alpha-down"></i>
+                        </button>
+                        <button class="sort-btn" data-sort="author" title="Sort by Author">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </section>
 
