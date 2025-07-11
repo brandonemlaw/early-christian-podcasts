@@ -799,7 +799,7 @@ $(document).ready(function() {
             const savedPosition = appState.podcastPositions[podcast.versionId];
             if (savedPosition && savedPosition > 0) {
                 appState.audio.currentTime = savedPosition;
-                showNotification(`Resumed from ${formatTime(savedPosition)}`);
+                // No longer show notification for resume
             }
         });
         
@@ -1122,6 +1122,10 @@ $(document).ready(function() {
             // Create compact alternative display for other perspectives
             const alternativeDisplay = createCompactAlternativeDisplay(podcast.authors, podcast.dates, appState.datePerspective);
             
+            // Get progress time for this podcast version
+            const savedPosition = appState.podcastPositions[podcast.versionId] || 0;
+            const durationDisplay = getDurationDisplay(savedPosition, podcast.duration);
+            
             const card = $(`
                 <div class="podcast-card ${playingClass}" data-id="${podcast.id}" data-version-id="${podcast.versionId}">
                     <div class="badge-container">
@@ -1144,7 +1148,7 @@ $(document).ready(function() {
                         ${podcast.versionNote ? `<p class="version-note">${podcast.versionNote}</p>` : ''}
                     </div>
                     <div class="podcast-meta">
-                        <span class="podcast-duration">${formatTime(podcast.duration)}</span>
+                        <span class="podcast-duration">${durationDisplay}</span>
                     </div>
                 </div>
             `);
@@ -1163,7 +1167,20 @@ $(document).ready(function() {
             }
         });
     }
-    
+
+    function getDurationDisplay(currentTime, totalDuration) {
+        // Show progress if at least 1 minute in and at least 1 minute from the end
+        const minThreshold = 60; // 1 minute
+        const maxThreshold = totalDuration - 60; // 1 minute from end
+        
+        if (currentTime >= minThreshold && currentTime <= maxThreshold) {
+            return `${formatTime(currentTime)} / ${formatTime(totalDuration)}`;
+        }
+        
+        // Otherwise just show total duration
+        return formatTime(totalDuration);
+    }
+
     function createCompactAlternativeDisplay(authors, dates, primaryPerspective) {
         const perspectives = ['scholarly', 'moderate', 'traditional'];
         const otherPerspectives = perspectives.filter(p => p !== primaryPerspective);
