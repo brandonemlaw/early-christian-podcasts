@@ -655,10 +655,15 @@ $(document).ready(function() {
         appState.filteredPodcasts = [];
         
         appState.podcasts.forEach(podcast => {
-            // Find the most recent version available in the current year
-            const availableVersions = podcast.versions.filter(v => 
-                v.dates[appState.datePerspective] <= appState.currentYear
-            );
+            // Find versions available to current perspective and within current year
+            const availableVersions = podcast.versions.filter(v => {
+                // Check if version is available to current perspective
+                const perspectiveAllowed = !v.perspectives || v.perspectives.includes(appState.datePerspective);
+                // Check if version is within current year
+                const dateAllowed = v.dates[appState.datePerspective] <= appState.currentYear;
+                
+                return perspectiveAllowed && dateAllowed;
+            });
             
             if (availableVersions.length > 0) {
                 // Get the most recent version based on selected date perspective
@@ -683,14 +688,16 @@ $(document).ready(function() {
                     isCanon: podcast.isCanon
                 };
                 
-                // Determine badge status
+                // Determine badge status - only consider versions available to current perspective
                 const versionKey = `${podcast.id}-${latestVersion.versionId}`;
                 const hasPlayedCurrentVersion = appState.playedPodcasts.has(versionKey);
-                const hasPlayedAnyVersion = podcast.versions.some(v => 
+                
+                // Check if user has played any version available to current perspective
+                const hasPlayedAnyAvailableVersion = availableVersions.some(v => 
                     appState.playedPodcasts.has(`${podcast.id}-${v.versionId}`)
                 );
                 
-                if (!hasPlayedAnyVersion) {
+                if (!hasPlayedAnyAvailableVersion) {
                     displayPodcast.badge = 'new';
                 } else if (!hasPlayedCurrentVersion) {
                     displayPodcast.badge = 'updated';

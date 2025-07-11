@@ -13,6 +13,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "didache-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"], // Available to all perspectives
                     "dates": {
                         "scholarly": 70,
                         "moderate": 60,
@@ -25,6 +26,7 @@ window.podcastData = {
                 },
                 {
                     "versionId": "didache-v2",
+                    "perspectives": ["scholarly"], // Only available to scholarly perspective
                     "dates": {
                         "scholarly": 200,
                         "moderate": 180,
@@ -49,6 +51,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "gospel-john-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 100,
                         "moderate": 95,
@@ -73,6 +76,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "clement-rome-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 96,
                         "moderate": 96,
@@ -85,6 +89,7 @@ window.podcastData = {
                 },
                 {
                     "versionId": "clement-rome-v2",
+                    "perspectives": ["scholarly"], // Only available to scholarly perspective
                     "dates": {
                         "scholarly": 150,
                         "moderate": 145,
@@ -109,6 +114,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "ignatius-letters-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 110,
                         "moderate": 108,
@@ -133,6 +139,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "justin-apology-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 155,
                         "moderate": 155,
@@ -157,6 +164,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "polycarp-martyrdom-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 156,
                         "moderate": 156,
@@ -181,6 +189,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "irenaeus-heresies-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 180,
                         "moderate": 180,
@@ -193,6 +202,7 @@ window.podcastData = {
                 },
                 {
                     "versionId": "irenaeus-heresies-v2",
+                    "perspectives": ["scholarly"], // Only available to scholarly perspective
                     "dates": {
                         "scholarly": 250,
                         "moderate": 245,
@@ -217,6 +227,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "tertullian-apologeticus-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 197,
                         "moderate": 197,
@@ -241,6 +252,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "clement-alexandria-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 208,
                         "moderate": 205,
@@ -265,6 +277,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "origen-principles-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 230,
                         "moderate": 230,
@@ -277,6 +290,7 @@ window.podcastData = {
                 },
                 {
                     "versionId": "origen-principles-v2",
+                    "perspectives": ["scholarly", "moderate"], // Not available to traditional perspective
                     "dates": {
                         "scholarly": 300,
                         "moderate": 295,
@@ -301,6 +315,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "cyprian-unity-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 251,
                         "moderate": 251,
@@ -325,6 +340,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "athanasius-incarnation-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 318,
                         "moderate": 320,
@@ -349,6 +365,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "chrysostom-homilies-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 390,
                         "moderate": 390,
@@ -373,6 +390,7 @@ window.podcastData = {
             "versions": [
                 {
                     "versionId": "augustine-confessions-v1",
+                    "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 400,
                         "moderate": 400,
