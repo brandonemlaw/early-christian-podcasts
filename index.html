@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Christian Podcasts - Timeline Player</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>Early Christian Podcasts</h1>
+            <p class="subtitle">Journey through the first 400 years of Christianity</p>
+        </header>
+
+        <!-- Year Slider Section -->
+        <section class="year-section">
+            <div class="year-display">
+                <span class="year-label">Year:</span>
+                <span class="current-year">32</span>
+                <span class="ad-label">AD</span>
+            </div>
+            <div class="slider-container">
+                <div id="year-slider"></div>
+                <div class="slider-labels">
+                    <span>32 AD</span>
+                    <span>432 AD</span>
+                </div>
+            </div>
+            <button class="play-timeline-btn" id="playTimelineBtn">
+                <span class="play-icon">▶</span>
+                Play Timeline
+            </button>
+        </section>
+
+        <!-- Controls Section -->
+        <section class="controls-section">
+            <div class="perspective-control">
+                <label>Dating Perspective:</label>
+                <div class="button-group" id="perspectiveButtons">
+                    <button class="perspective-btn active" data-perspective="scholarly">Scholarly</button>
+                    <button class="perspective-btn" data-perspective="moderate">Moderate</button>
+                    <button class="perspective-btn" data-perspective="traditional">Traditional</button>
+                </div>
+            </div>
+            <div class="sort-control">
+                <label for="sortBy">Sort by:</label>
+                <select id="sortBy">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Podcasts List -->
+        <section class="podcasts-section">
+            <h2>Available Podcasts</h2>
+            <div class="podcasts-grid" id="podcast-list">
+                <!-- Podcasts will be populated here -->
+            </div>
+        </section>
+
+        <!-- Audio Player -->
+        <div class="audio-player" id="audioPlayer">
+            <div class="player-header">
+                <div class="player-info">
+                    <h3 class="player-title" id="playerTitle">No podcast selected</h3>
+                    <p class="player-author" id="playerAuthor"></p>
+                </div>
+                <button class="close-player" id="closePlayer">×</button>
+            </div>
+            
+            <div class="player-controls">
+                <button class="control-btn" id="rewind15" title="Rewind 15 seconds">
+                    <i class="fas fa-backward"></i>
+                </button>
+                <button class="control-btn play-pause" id="playPauseBtn">▶</button>
+                <button class="control-btn" id="forward30" title="Skip 30 seconds">
+                    <i class="fas fa-forward"></i>
+                </button>
+                <div class="speed-control">
+                    <button class="speed-btn" id="speedBtn" title="Playback speed">1.0x</button>
+                    <div class="speed-options" id="speedOptions">
+                        <button class="speed-option" data-speed="0.5">0.5x</button>
+                        <button class="speed-option" data-speed="0.75">0.75x</button>
+                        <button class="speed-option" data-speed="1.0">1.0x</button>
+                        <button class="speed-option" data-speed="1.25">1.25x</button>
+                        <button class="speed-option" data-speed="1.5">1.5x</button>
+                        <button class="speed-option" data-speed="2.0">2.0x</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="time-info">
+                    <span id="currentTime">0:00</span>
+                    <span id="totalTime">0:00</span>
+                </div>
+            </div>
+            
+            <audio id="audioElement" preload="metadata"></audio>
+        </div>
+
+        <!-- Timeline Play Modal -->
+        <div class="modal" id="timelineModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Timeline Playback Settings</h3>
+                    <button class="close-modal" id="closeModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="pace-selection">
+                        <label for="paceSelect">Choose your pace:</label>
+                        <select id="paceSelect">
+                            <option value="1">1 week per decade</option>
+                            <option value="3">3 weeks per decade</option>
+                            <option value="4">1 month per decade</option>
+                            <option value="8">2 months per decade</option>
+                        </select>
+                    </div>
+                    <div class="timeline-info">
+                        <p>Timeline will advance automatically based on your selected pace.</p>
+                        <p>New and updated podcasts will be revealed as you progress through history.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancelTimeline">Cancel</button>
+                    <button class="btn btn-primary" id="startTimeline">Start Timeline</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
