@@ -393,15 +393,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "colossians-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "colossians-traditional",
+                    "perspectives": ["moderate", "traditional"],
                     "dates": {
                         "scholarly": 85,
                         "moderate": 61,
                         "traditional": 61
                     },
                     "description": "Paul confronts false teaching and proclaims the supremacy of Christ over all creation.",
-                    "audioUrl": "/audio/colossians-v1.mp3",
+                    "audioUrl": "/audio/colossians-traditional.mp3",
+                    "duration": 3000,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "colossians-scholarly",
+                    "perspectives": ["scholarly"],
+                    "dates": {
+                        "scholarly": 85,
+                        "moderate": 61,
+                        "traditional": 61
+                    },
+                    "description": "Paul confronts false teaching and proclaims the supremacy of Christ over all creation.",
+                    "audioUrl": "/audio/colossians-scholarly.mp3",
                     "duration": 3000,
                     "versionNote": ""
                 }
