@@ -21,7 +21,7 @@ window.podcastData = {
                         "traditional": 49
                     },
                     "description": "Paul defends justification by faith and confronts the Judaizers threatening the gospel message.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/galatians-v1.mp3",
                     "duration": 2400,
                     "versionNote": ""
                 }
@@ -47,7 +47,7 @@ window.podcastData = {
                         "traditional": 50
                     },
                     "description": "Paul writes his first letter encouraging the young church and addressing questions about Christ's return.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-thessalonians-v1.mp3",
                     "duration": 1800,
                     "versionNote": ""
                 }
@@ -73,7 +73,7 @@ window.podcastData = {
                         "traditional": 54
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-corinthians-traditional.mp3",
                     "duration": 4800,
                     "versionNote": ""
                 },
@@ -86,7 +86,7 @@ window.podcastData = {
                         "traditional": 54
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-corinthians-moderate.mp3",
                     "duration": 5100,
                     "versionNote": "with parenthetical tone"
                 },
@@ -99,7 +99,7 @@ window.podcastData = {
                         "traditional": 54
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-corinthians-scholarly-v1.mp3",
                     "duration": 4950,
                     "versionNote": "without interpolation"
                 },
@@ -115,7 +115,7 @@ window.podcastData = {
                         "scholarly": 100,
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-corinthians-scholarly-v2.mp3",
                     "duration": 4950,
                     "versionNote": "with interpolation"
                 }
@@ -141,7 +141,7 @@ window.podcastData = {
                         "traditional": 55
                     },
                     "description": "Paul defends his apostolic authority and encourages generous giving while addressing his critics.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-corinthians-traditional.mp3",
                     "duration": 3900,
                     "versionNote": ""
                 },
@@ -154,7 +154,7 @@ window.podcastData = {
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 8, Paul organizes the collection for Jerusalem's poor saints.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-corinthians-c.mp3",
                     "duration": 750,
                     "versionNote": ""
                 }
@@ -180,7 +180,7 @@ window.podcastData = {
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 2:14-7:4, Paul describes his ministry of reconciliation and new covenant.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-corinthians-d.mp3",
                     "duration": 2700,
                     "versionNote": ""
                 }
@@ -198,16 +198,16 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "2-corinthians-d",
+                    "versionId": "2-corinthians-e",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
                         "scholarly": 55,
                         "moderate": 56,
                         "traditional": 55
                     },
-                    "description": "From 2 Corinthians 2:14-7:4, Paul describes his ministry of reconciliation and new covenant.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
-                    "duration": 2700,
+                    "description": "From 2 Corinthians 10:1-13:10, Paul confronts the 'super-apostles' and defends his weakness as strength.",
+                    "audioUrl": "/audio/2-corinthians-e.mp3",
+                    "duration": 2100,
                     "versionNote": ""
                 }
             ]
@@ -224,32 +224,6 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "2-corinthians-e",
-                    "perspectives": ["scholarly", "moderate"],
-                    "dates": {
-                        "scholarly": 55,
-                        "moderate": 56,
-                        "traditional": 55
-                    },
-                    "description": "From 2 Corinthians 10:1-13:10, Paul confronts the 'super-apostles' and defends his weakness as strength.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
-                    "duration": 2100,
-                    "versionNote": ""
-                }
-            ]
-        },
-        {
-            "id": "2-corinthians-episode-7",
-            "title": "Paul to the Corinthians Episode 7",
-            "isCanon": true,
-            "sortIndex": 4.4,
-            "authors": {
-                "scholarly": "Paul the Apostle",
-                "moderate": "Paul the Apostle",
-                "traditional": "Paul the Apostle"
-            },
-            "versions": [
-                {
                     "versionId": "2-corinthians-f",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
@@ -258,7 +232,7 @@ window.podcastData = {
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 1:1-2:13; 7:5-16; 13:11-13, Paul expresses relief at the Corinthians' repentance and reconciliation.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-corinthians-f.mp3",
                     "duration": 1650,
                     "versionNote": ""
                 }
@@ -284,7 +258,7 @@ window.podcastData = {
                         "traditional": 57
                     },
                     "description": "Paul presents his most systematic theology of salvation, righteousness, and God's plan for Jews and Gentiles.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/romans-v1.mp3",
                     "duration": 4800,
                     "versionNote": ""
                 }
@@ -310,7 +284,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "Paul writes from prison expressing joy, unity, and gratitude to his beloved Philippian church.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/philippians-traditional.mp3",
                     "duration": 3300,
                     "versionNote": ""
                 },
@@ -323,7 +297,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "From Philippians 4:10-20, Paul writes a brief thank you note for the Philippians' financial support.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/philippians-a.mp3",
                     "duration": 600,
                     "versionNote": ""
                 }
@@ -349,7 +323,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "From Philippians 1:1-3:1; 4:4-9, 21-23, Paul encourages unity and shares the Christ hymn while expressing his circumstances.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/philippians-b.mp3",
                     "duration": 2400,
                     "versionNote": ""
                 }
@@ -375,7 +349,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "From Philippians 3:2-4:3, Paul warns against Judaizers and calls believers to press toward the goal.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/philippians-c.mp3",
                     "duration": 1200,
                     "versionNote": ""
                 }
@@ -401,7 +375,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "Paul writes a personal letter requesting forgiveness for the runaway slave Onesimus.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/philemon-v1.mp3",
                     "duration": 750,
                     "versionNote": ""
                 }
@@ -427,7 +401,7 @@ window.podcastData = {
                         "traditional": 61
                     },
                     "description": "Paul confronts false teaching and proclaims the supremacy of Christ over all creation.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/colossians-v1.mp3",
                     "duration": 3000,
                     "versionNote": ""
                 }
@@ -453,7 +427,7 @@ window.podcastData = {
                         "traditional": 62
                     },
                     "description": "Paul describes the mystery of the church as Christ's body and the believer's spiritual blessings.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/ephesians-v1.mp3",
                     "duration": 4200,
                     "versionNote": ""
                 }
@@ -479,7 +453,7 @@ window.podcastData = {
                         "traditional": 51
                     },
                     "description": "Paul clarifies teachings about Christ's return and addresses concerns about the Day of the Lord.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-thessalonians-v1.mp3",
                     "duration": 1500,
                     "versionNote": ""
                 }
@@ -505,7 +479,7 @@ window.podcastData = {
                         "traditional": 63
                     },
                     "description": "Paul instructs his protégé Timothy on church leadership, doctrine, and pastoral care.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/1-timothy-v1.mp3",
                     "duration": 3600,
                     "versionNote": ""
                 }
@@ -531,7 +505,7 @@ window.podcastData = {
                         "traditional": 63
                     },
                     "description": "Paul gives instructions for establishing church leadership and sound doctrine in Crete.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/titus-v1.mp3",
                     "duration": 1800,
                     "versionNote": ""
                 }
@@ -557,7 +531,7 @@ window.podcastData = {
                         "traditional": 64
                     },
                     "description": "Paul writes his final letter, charging Timothy to faithfully guard the gospel and endure suffering.",
-                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "audioUrl": "/audio/2-timothy-v1.mp3",
                     "duration": 2700,
                     "versionNote": ""
                 }
