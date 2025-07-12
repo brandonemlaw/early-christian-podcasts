@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background gradient inspired by styles.css -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0f3460;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#533483;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7209b7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bgGradient)" rx="80"/>
+  
+  <!-- Cross -->
+  <g fill="#ecf0f1">
+    <!-- Vertical bar -->
+    <rect x="230" y="80" width="52" height="260" rx="6"/>
+    <!-- Horizontal bar -->
+    <rect x="180" y="140" width="152" height="52" rx="6"/>
+  </g>
+  
+  <!-- Timeline elements (moved down) -->
+  <g fill="#667eea" opacity="0.9">
+    <!-- Timeline line -->
+    <rect x="50" y="420" width="412" height="20" rx="10"/>
+    <!-- Timeline markers -->
+    <circle cx="120" cy="430" r="18"/>
+    <circle cx="200" cy="430" r="18"/>
+    <circle cx="280" cy="430" r="18"/>
+    <circle cx="360" cy="430" r="18"/>
+  </g>
+  
+</svg>

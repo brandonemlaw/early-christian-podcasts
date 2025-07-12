@@ -658,11 +658,24 @@ $(document).ready(function() {
     }
 
     function formatTime(seconds) {
-        if (isNaN(seconds)) return '0:00';
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
+        if (isNaN(seconds)) return '0 mins';
+        const hours = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds - hours * 3600) / 60);
+        const secs = Math.floor((seconds - hours * 3600) % 60);
         return mins + ':' + (secs < 10 ? '0' : '') + secs;
     }
+
+    function formatTimeSummary(seconds) {
+        if (isNaN(seconds)) return '0';
+        const hours = Math.floor(seconds / 3600);
+        const mins = Math.floor((seconds - hours * 3600) / 60);
+        if (hours > 0) {
+            return `${hours}:${mins}`;
+        } else {
+            return `${mins}`;
+        }
+    }
+
 
     function showTimelineModal() {
         $('#timelineModal').addClass('active');
@@ -1020,11 +1033,11 @@ $(document).ready(function() {
         const maxThreshold = totalDuration - 60; // 1 minute from end
         
         if (currentTime >= minThreshold && currentTime <= maxThreshold) {
-            return `${formatTime(currentTime)} / ${formatTime(totalDuration)}`;
+            return `${formatTimeSummary(currentTime)} / ${formatTimeSummary(totalDuration)} mins`;
         }
         
         // Otherwise just show total duration
-        return formatTime(totalDuration);
+        return `${formatTimeSummary(totalDuration)} mins`;
     }
 
     function getPlayCountDisplay(versionId) {
