@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Early Christian Podcasts - Timeline Player</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/ui-lightness/jquery-ui.css">
 </head>
 <body>
     <div class="app-container">
@@ -26,7 +24,12 @@
                 <span class="ad-label">AD</span>
             </div>
             <div class="slider-container">
-                <div id="year-slider"></div>
+                <div class="year-slider" id="year-slider">
+                    <div class="slider-track">
+                        <div class="slider-fill" id="slider-fill"></div>
+                    </div>
+                    <div class="slider-handle" id="slider-handle"></div>
+                </div>
                 <div class="slider-labels">
                     <span>32 AD</span>
                     <span>432 AD</span>
@@ -156,7 +159,6 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <script src="data/podcasts.js"></script>
     <script src="app.js"></script>
 </body>

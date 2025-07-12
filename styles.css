@@ -23,6 +23,12 @@ body {
     transition: background 2s ease;
 }
 
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
 /* Dynamic background variables - will be updated via JavaScript */
 :root {
     --dynamic-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #7209b7 100%);
@@ -125,78 +131,89 @@ body::before {
 .slider-container {
     position: relative;
     margin-bottom: 20px;
+    padding: 15px 0;
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
-#year-slider {
+.year-slider {
+    position: relative;
+    height: 8px;
     width: 100%;
-    height: 6px;
+    cursor: pointer;
+    touch-action: pan-y;
+}
+
+.slider-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
     background: rgba(255, 255, 255, 0.15);
-    border-radius: 3px;
+    border-radius: 4px;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.ui-slider-handle {
-    width: 20px !important;
-    height: 20px !important;
-    border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.9) !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-    cursor: pointer !important;
-    top: -7px !important;
+.slider-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    transition: width 0.1s ease;
+    width: 0%;
+    will-change: width;
+}
+
+.slider-handle {
+    position: absolute;
+    top: 50%;
+    width: 16px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    z-index: 10;
+    will-change: transform;
 }
 
-.ui-slider-handle:hover {
-    transform: scale(1.1);
-    transition: transform 0.2s ease;
+.slider-handle:hover {
+    transform: translate(-50%, -50%) scale(1.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
-.ui-slider-range {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-radius: 3px !important;
+.slider-handle:active,
+.slider-handle.dragging {
+    cursor: grabbing;
+    transform: translate(-50%, -50%) scale(1.4);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
+    transition: none;
 }
 
 .slider-labels {
     display: flex;
     justify-content: space-between;
     margin-top: 8px;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.play-timeline-btn {
-    display: block;
-    width: 100%;
-    padding: 14px 24px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-.play-timeline-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.play-timeline-btn.timeline-active {
-    background: rgba(102, 126, 234, 0.2);
-    border-color: rgba(102, 126, 234, 0.3);
-}
-
-.play-timeline-btn.timeline-active:hover {
-    background: rgba(102, 126, 234, 0.3);
+.slider-labels span {
+    color: white;
+    opacity: 0.9;
 }
 
 .slider-container.disabled {
@@ -204,8 +221,8 @@ body::before {
     pointer-events: none;
 }
 
-.play-icon {
-    margin-right: 8px;
+.slider-container.disabled .slider-handle {
+    cursor: not-allowed;
 }
 
 /* Controls Section */
@@ -396,7 +413,8 @@ body::before {
 
 /* Podcasts Section */
 .podcasts-section {
-    padding: 0 16px 100px;
+    padding: 0 16px 220px;
+    overflow: hidden;
 }
 
 .podcasts-section h2 {
@@ -411,6 +429,7 @@ body::before {
 .podcasts-grid {
     display: grid;
     gap: 12px;
+    overflow: hidden;
 }
 
 .podcast-card {
@@ -506,24 +525,34 @@ body::before {
     align-items: center;
     gap: 8px;
     margin-bottom: 3px;
+    flex-wrap: nowrap;
 }
 
 .primary-author {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
     font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .primary-date {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
     font-size: 0.8rem;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .date-separator {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.8rem;
     margin: 0 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .alternative-info {
@@ -981,130 +1010,134 @@ body::before {
 }
 
 /* Responsive Design */
-@media (min-width: 768px) {
+@media (max-width: 767px) {
+    .controls-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        align-items: stretch;
+    }
+    
+    .control-group {
+        width: 100%;
+    }
+    
+    .button-group {
+        width: 100%;
+    }
+    
+    /* Ensure no horizontal overflow */
     .app-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 20px;
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
     }
     
-    .header {
-        border-radius: 20px;
+    .podcasts-grid {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .podcast-card {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Improve touch targets */
+    .perspective-btn,
+    .sort-btn {
+        min-height: 44px;
+        padding: 12px 8px;
+        font-size: 0.85rem;
+    }
+    
+    /* Better slider touch interaction */
+    .slider-container {
+        padding: 25px 0;
         margin: 20px 0;
-        position: relative;
+        touch-action: pan-y;
     }
     
-    .year-section {
-        margin: 20px 0;
-        padding: 30px;
+    .year-slider {
+        height: 12px;
+        touch-action: pan-y;
     }
     
-    .current-year {
-        font-size: 3rem;
+    .slider-handle {
+        width: 20px;
+        height: 20px;
+        border-width: 2px;
+        transition: all 0.1s ease;
     }
     
-    .controls-section {
-        margin: 20px 0;
-        padding: 24px;
+    .slider-handle:hover {
+        transform: translate(-50%, -50%) scale(1.2);
     }
+    
+    .slider-handle:active,
+    .slider-handle.dragging {
+        transform: translate(-50%, -50%) scale(1.3);
+        transition: none;
+    }
+    
+    .slider-labels {
+        font-size: 0.75rem;
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    /* ...existing code... */
     
     .controls-grid {
         grid-template-columns: 2fr 1fr;
         gap: 24px;
     }
     
-    .podcasts-section {
-        padding: 0 0 120px;
-    }
-    
-    .podcasts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-        gap: 16px;
-    }
-    
-    .podcast-card {
-        padding: 16px;
-        min-height: 140px; /* Reduced from default */
-    }
-    
-    .podcast-info {
-        padding-right: 50px;
-        padding-bottom: 24px;
-    }
-    
-    .podcast-meta {
-        bottom: 12px;
-        right: 12px;
-    }
-    
-    .play-count {
-        font-size: 0.8rem;
-    }
-    
-    .podcast-duration {
-        font-size: 0.8rem;
-        padding: 5px 10px;
-    }
-    
-    .audio-player {
-        padding: 20px;
-    }
-    
-    .player-controls {
-        gap: 20px;
-    }
-    
-    .control-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 16px;
-    }
-    
-    .control-btn.play-pause {
-        width: 55px;
-        height: 55px;
-        font-size: 20px;
-    }
+    /* ...existing code... */
 }
 
 @media (max-width: 480px) {
+    /* Remove the flex-direction: column override for primary-info */
     .primary-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 6px;
     }
     
-    .alternative-info {
-        font-size: 0.65rem;
-        line-height: 1.15;
+    .primary-author {
+        font-size: 0.8rem;
+        max-width: 60%;
     }
     
-    .alt-perspective {
-        margin-bottom: 0;
+    .primary-date {
+        font-size: 0.75rem;
     }
     
-    .podcast-info {
-        padding-right: 45px;
-        padding-bottom: 18px;
+    /* ...existing code... */
+}
+
+/* Touch-specific improvements */
+@media (hover: none) and (pointer: coarse) {
+    .slider-handle {
+        width: 24px;
+        height: 24px;
+        border-width: 2px;
+        transition: transform 0.1s ease;
     }
     
-    .podcast-meta {
-        bottom: 8px;
-        right: 8px;
+    .slider-handle:active,
+    .slider-handle.dragging {
+        transform: translate(-50%, -50%) scale(1.25);
+        transition: none;
     }
     
-    .play-count {
-        font-size: 0.7rem;
+    .slider-labels {
+        font-size: 0.75rem;
+        font-weight: 700;
     }
     
-    .podcast-duration {
-        font-size: 0.7rem;
-        padding: 3px 6px;
-    }
-    
-    .podcast-card {
-        min-height: 110px; /* Added explicit mobile height */
-    }
+    /* ...existing code... */
 }
 
 /* Animations */
@@ -1176,58 +1209,49 @@ body::before {
 .sort-btn i {
     font-size: 0.9rem;
 }
-}
 
-.podcast-card {
-    animation: fadeIn 0.4s ease forwards;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
-
-.sort-btn {
-    flex: 1;
-    padding: 10px 8px;
-    background: transparent;
-    border: none;
-    color: rgba(255, 255, 255, 0.7);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 1rem;
-    font-weight: 500;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 38px;
-}
-
-.sort-btn:last-child {
-    border-right: none;
-}
-
-.sort-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+.play-timeline-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.sort-btn.active {
-    background: rgba(102, 126, 234, 0.15);
+.play-timeline-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.play-timeline-btn.timeline-active {
+    background: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.3);
+}
+
+.play-timeline-btn.timeline-active:hover {
+    background: rgba(102, 126, 234, 0.3);
+}
+
+.play-icon {
+    margin-right: 8px;
+    display: inline-block;
+}
+    font-weight: 600;
+}
+
+.sort-btn i {
+    font-size: 0.9rem;
+}
     color: white;
     font-weight: 600;
 }
