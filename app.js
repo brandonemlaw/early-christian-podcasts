@@ -237,27 +237,163 @@ $(document).ready(function() {
     }
 
     function initializeSlider() {
-        $("#year-slider").slider({
-            range: "min",
-            value: appState.currentYear,
-            min: 32,
-            max: 432,
-            slide: function(event, ui) {
-                if (appState.timeline.isActive) {
-                    return false; // Prevent slider interaction when timeline is active
-                }
-                updateYear(ui.value);
-            }
-        });
+        const slider = document.getElementById('year-slider');
+        const handle = document.getElementById('slider-handle');
+        const fill = document.getElementById('slider-fill');
+        const track = slider.querySelector('.slider-track');
         
-        updateYear(appState.currentYear);
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let sliderRect = null;
+        let animationId = null;
+        
+        const minYear = 32;
+        const maxYear = 432;
+        const yearRange = maxYear - minYear;
+        
+        // Set initial position
+        updateSliderPosition(appState.currentYear);
+        
+        // Cache slider rect and update on resize
+        function updateSliderRect() {
+            sliderRect = slider.getBoundingClientRect();
+        }
+        
+        updateSliderRect();
+        window.addEventListener('resize', updateSliderRect);
+        
+        // Mouse events
+        handle.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', endDrag);
+        
+        // Touch events
+        handle.addEventListener('touchstart', startDrag, { passive: false });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', endDrag);
+        document.addEventListener('touchcancel', endDrag);
+        
+        // Click on track to jump
+        track.addEventListener('click', jumpToPosition);
+        track.addEventListener('touchstart', jumpToPosition, { passive: false });
+        
+        function startDrag(e) {
+            if (appState.timeline.isActive) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            isDragging = true;
+            handle.classList.add('dragging');
+            
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            startX = clientX;
+            currentX = clientX;
+            
+            updateSliderRect();
+            document.body.style.userSelect = 'none';
+            document.body.style.webkitUserSelect = 'none';
+            document.body.style.touchAction = 'none';
+        }
+        
+        function drag(e) {
+            if (!isDragging || appState.timeline.isActive) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            currentX = clientX;
+            
+            // Cancel previous animation frame
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+            
+            // Use requestAnimationFrame for smooth updates
+            animationId = requestAnimationFrame(() => {
+                updateSliderFromDrag(currentX);
+            });
+        }
+        
+        function endDrag(e) {
+            if (!isDragging) return;
+            
+            e.preventDefault();
+            isDragging = false;
+            handle.classList.remove('dragging');
+            
+            document.body.style.userSelect = '';
+            document.body.style.webkitUserSelect = '';
+            document.body.style.touchAction = '';
+            
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+        
+        function jumpToPosition(e) {
+            if (appState.timeline.isActive || e.target === handle) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            updateSliderFromDrag(clientX);
+        }
+        
+        function updateSliderFromDrag(clientX) {
+            if (!sliderRect) updateSliderRect();
+            
+            const offsetX = clientX - sliderRect.left;
+            const percentage = Math.max(0, Math.min(100, (offsetX / sliderRect.width) * 100));
+            const newYear = Math.round(minYear + (percentage / 100) * yearRange);
+            
+            // Update visual position immediately for smooth dragging
+            handle.style.left = `${percentage}%`;
+            fill.style.width = `${percentage}%`;
+            
+            // Update year display immediately
+            $('.current-year').text(newYear);
+            
+            // Only update app state if year actually changed
+            if (newYear !== appState.currentYear) {
+                appState.currentYear = newYear;
+                updateDynamicBackground(newYear);
+                
+                // Throttle the expensive operations
+                clearTimeout(updateSliderFromDrag.timeout);
+                updateSliderFromDrag.timeout = setTimeout(() => {
+                    filterPodcastsByYear();
+                    saveStateToStorage();
+                }, 100);
+            }
+        }
+        
+        function updateSliderPosition(year) {
+            const percentage = ((year - minYear) / yearRange) * 100;
+            handle.style.left = `${percentage}%`;
+            fill.style.width = `${percentage}%`;
+        }
+        
+        // Store the update function for external use
+        slider.updatePosition = updateSliderPosition;
+        
         updateTimelineUI();
     }
 
     function updateYear(year) {
         appState.currentYear = year;
         $('.current-year').text(year);
-        $("#year-slider").slider("value", year);
+        
+        // Update slider position
+        const slider = document.getElementById('year-slider');
+        if (slider && slider.updatePosition) {
+            slider.updatePosition(year);
+        }
+        
         updateDynamicBackground(year);
         filterPodcastsByYear();
         saveStateToStorage();
@@ -564,18 +700,16 @@ $(document).ready(function() {
     function updateTimelineUI() {
         const isActive = appState.timeline.isActive;
         const button = $('#playTimelineBtn');
-        const slider = $('#year-slider');
+        const sliderContainer = $('.slider-container');
         
         if (isActive) {
             button.html('<span class="play-icon">🔓</span> Unlock Timeline');
             button.addClass('timeline-active');
-            slider.slider('disable');
-            $('.slider-container').addClass('disabled');
+            sliderContainer.addClass('disabled');
         } else {
             button.html('<span class="play-icon">▶</span> Play Timeline');
             button.removeClass('timeline-active');
-            slider.slider('enable');
-            $('.slider-container').removeClass('disabled');
+            sliderContainer.removeClass('disabled');
         }
     }
 
