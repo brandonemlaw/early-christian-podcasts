@@ -1080,6 +1080,17 @@ $(document).ready(function() {
         setupAudioPlayer(podcast);
         showAudioPlayer();
         
+        // Auto-play the podcast immediately
+        if (appState.audio) {
+            appState.audio.play().then(() => {
+                appState.isPlaying = true;
+                updatePlayButton();
+            }).catch(error => {
+                console.error('Auto-play failed:', error);
+                // Auto-play might be blocked by browser policy, user can manually click play
+            });
+        }
+        
         // Save state
         saveStateToStorage();
     }
