@@ -761,6 +761,30 @@ $(document).ready(function() {
             const canonBadge = podcast.isCanon ? `<span class="badge canon">Canon</span>` : '';
             const playingClass = isCurrentlyPlaying ? 'playing' : '';
             
+            // Determine authorship colors based on current perspective
+            const isPaulAuthor = podcast.primaryAuthor === 'Paul the Apostle';
+            let authorshipColors;
+            
+            if (isPaulAuthor) {
+                // Gold/amber tones for Paul
+                authorshipColors = {
+                    background: 'linear-gradient(135deg, rgba(255, 193, 7, 0.15) 0%, rgba(255, 171, 0, 0.1) 100%), var(--frost-color)',
+                    border: 'rgba(255, 193, 7, 0.25)',
+                    hoverBackground: 'linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(255, 171, 0, 0.15) 100%), rgba(255, 255, 255, 0.12)',
+                    hoverBorder: 'rgba(255, 193, 7, 0.35)',
+                    hoverShadow: '0 8px 32px rgba(255, 193, 7, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                };
+            } else {
+                // Teal/cyan tones for non-Paul
+                authorshipColors = {
+                    background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%), var(--frost-color)',
+                    border: 'rgba(20, 184, 166, 0.25)',
+                    hoverBackground: 'linear-gradient(135deg, rgba(20, 184, 166, 0.2) 0%, rgba(6, 182, 212, 0.15) 100%), rgba(255, 255, 255, 0.12)',
+                    hoverBorder: 'rgba(20, 184, 166, 0.35)',
+                    hoverShadow: '0 8px 32px rgba(20, 184, 166, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                };
+            }
+            
             // Create compact alternative display for other perspectives
             const alternativeDisplay = createCompactAlternativeDisplay(podcast.authors, podcast.dates, appState.datePerspective);
             
@@ -769,7 +793,10 @@ $(document).ready(function() {
             const durationDisplay = getDurationDisplay(savedPosition, podcast.duration);
             
             const card = $(`
-                <div class="podcast-card ${playingClass}" data-id="${podcast.id}" data-version-id="${podcast.versionId}">
+                <div class="podcast-card ${playingClass}" 
+                     data-id="${podcast.id}" 
+                     data-version-id="${podcast.versionId}"
+                     style="background: ${authorshipColors.background}; border-color: ${authorshipColors.border};">
                     <div class="badge-container">
                         ${badgeHtml}
                         ${canonBadge}
@@ -794,6 +821,28 @@ $(document).ready(function() {
                     </div>
                 </div>
             `);
+            
+            // Add hover effects with authorship colors
+            card.hover(
+                function() {
+                    if (!$(this).hasClass('playing')) {
+                        $(this).css({
+                            'background': authorshipColors.hoverBackground,
+                            'border-color': authorshipColors.hoverBorder,
+                            'box-shadow': authorshipColors.hoverShadow
+                        });
+                    }
+                },
+                function() {
+                    if (!$(this).hasClass('playing')) {
+                        $(this).css({
+                            'background': authorshipColors.background,
+                            'border-color': authorshipColors.border,
+                            'box-shadow': '0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+                        });
+                    }
+                }
+            );
             
             container.append(card);
         });
