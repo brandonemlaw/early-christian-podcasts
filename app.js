@@ -567,6 +567,46 @@ $(document).ready(function() {
         const currentSpeed = parseFloat($('#speedBtn').text()) || 1.0;
         appState.audio.playbackRate = currentSpeed;
         
+        // Set up Media Session API for iOS/mobile media controls
+        if ('mediaSession' in navigator) {
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: podcast.title,
+                artist: podcast.primaryAuthor,
+                album: 'Early Christian Podcasts',
+                artwork: [
+                    {
+                        src: '/icons/icon.svg',
+                        sizes: '512x512',
+                        type: 'image/svg+xml'
+                    }
+                ]
+            });
+            
+            // Set up action handlers for media controls
+            navigator.mediaSession.setActionHandler('play', () => {
+                if (appState.audio && !appState.isPlaying) {
+                    togglePlayPause();
+                }
+            });
+            
+            navigator.mediaSession.setActionHandler('pause', () => {
+                if (appState.audio && appState.isPlaying) {
+                    togglePlayPause();
+                }
+            });
+            
+            navigator.mediaSession.setActionHandler('seekbackward', () => {
+                seekRelative(-15);
+            });
+            
+            navigator.mediaSession.setActionHandler('seekforward', () => {
+                seekRelative(30);
+            });
+            
+            navigator.mediaSession.setActionHandler('previoustrack', null);
+            navigator.mediaSession.setActionHandler('nexttrack', null);
+        }
+        
         // Reset play state
         appState.isPlaying = false;
         updatePlayButton();
@@ -629,6 +669,15 @@ $(document).ready(function() {
         
         $('#currentTime').text(formatTime(appState.audio.currentTime));
         $('#totalTime').text(formatTime(appState.audio.duration));
+        
+        // Update Media Session API position state for iOS controls
+        if ('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession) {
+            navigator.mediaSession.setPositionState({
+                duration: appState.audio.duration,
+                playbackRate: appState.audio.playbackRate,
+                position: appState.audio.currentTime
+            });
+        }
         
         // Save position every 10 seconds during playback
         if (appState.isPlaying && Math.floor(appState.audio.currentTime) % 10 === 0) {
