@@ -413,7 +413,8 @@ body::before {
 
 /* Podcasts Section */
 .podcasts-section {
-    padding: 0 16px 100px;
+    padding: 0 16px 220px;
+    overflow: hidden;
 }
 
 .podcasts-section h2 {
@@ -428,6 +429,7 @@ body::before {
 .podcasts-grid {
     display: grid;
     gap: 12px;
+    overflow: hidden;
 }
 
 .podcast-card {

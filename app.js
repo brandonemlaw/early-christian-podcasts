@@ -611,7 +611,7 @@ $(document).ready(function() {
     }
 
     function updatePlayButton() {
-        $('#playPauseBtn').text(appState.isPlaying ? '⏸' : '▶');
+        $('#playPauseBtn').html(appState.isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>');
     }
 
     function seekRelative(seconds) {
