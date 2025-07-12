@@ -659,17 +659,28 @@ $(document).ready(function() {
             const availableVersions = podcast.versions.filter(v => {
                 // Check if version is available to current perspective
                 const perspectiveAllowed = !v.perspectives || v.perspectives.includes(appState.datePerspective);
-                // Check if version is within current year
-                const dateAllowed = v.dates[appState.datePerspective] <= appState.currentYear;
+                
+                // Check if version is within current year - use updateDates if available, otherwise use regular dates
+                const effectiveDate = v.updateDates && v.updateDates[appState.datePerspective] 
+                    ? v.updateDates[appState.datePerspective] 
+                    : v.dates[appState.datePerspective];
+                const dateAllowed = effectiveDate <= appState.currentYear;
                 
                 return perspectiveAllowed && dateAllowed;
             });
             
             if (availableVersions.length > 0) {
-                // Get the most recent version based on selected date perspective
-                const latestVersion = availableVersions.reduce((latest, current) => 
-                    current.dates[appState.datePerspective] > latest.dates[appState.datePerspective] ? current : latest
-                );
+                // Get the most recent version based on effective dates (updateDates or regular dates)
+                const latestVersion = availableVersions.reduce((latest, current) => {
+                    const latestEffectiveDate = latest.updateDates && latest.updateDates[appState.datePerspective]
+                        ? latest.updateDates[appState.datePerspective]
+                        : latest.dates[appState.datePerspective];
+                    const currentEffectiveDate = current.updateDates && current.updateDates[appState.datePerspective]
+                        ? current.updateDates[appState.datePerspective] 
+                        : current.dates[appState.datePerspective];
+                    
+                    return currentEffectiveDate > latestEffectiveDate ? current : latest;
+                });
                 
                 // Create a combined podcast object for display
                 const displayPodcast = {
@@ -681,11 +692,12 @@ $(document).ready(function() {
                     audioUrl: latestVersion.audioUrl,
                     duration: latestVersion.duration,
                     dates: latestVersion.dates,
-                    primaryDate: latestVersion.dates[appState.datePerspective],
+                    primaryDate: latestVersion.dates[appState.datePerspective], // Always use original dates for display
                     versionId: latestVersion.versionId,
                     versionNote: latestVersion.versionNote,
                     versions: availableVersions,
-                    isCanon: podcast.isCanon
+                    isCanon: podcast.isCanon,
+                    sortIndex: podcast.sortIndex
                 };
                 
                 // Determine badge status - only consider versions available to current perspective
@@ -726,15 +738,17 @@ $(document).ready(function() {
             switch (appState.sortBy) {
                 case 'title':
                     const titleCompare = a.title.localeCompare(b.title);
-                    return titleCompare !== 0 ? titleCompare : b.primaryDate - a.primaryDate;
+                    return titleCompare !== 0 ? titleCompare : (a.sortIndex || 0) - (b.sortIndex || 0);
                 case 'author':
                     const authorCompare = a.primaryAuthor.localeCompare(b.primaryAuthor);
-                    return authorCompare !== 0 ? authorCompare : b.primaryDate - a.primaryDate;
+                    return authorCompare !== 0 ? authorCompare : (a.sortIndex || 0) - (b.sortIndex || 0);
                 case 'oldest':
-                    return a.primaryDate - b.primaryDate;
+                    const oldestDateCompare = a.primaryDate - b.primaryDate;
+                    return oldestDateCompare !== 0 ? oldestDateCompare : (a.sortIndex || 0) - (b.sortIndex || 0);
                 case 'newest':
                 default:
-                    return b.primaryDate - a.primaryDate;
+                    const newestDateCompare = b.primaryDate - a.primaryDate;
+                    return newestDateCompare !== 0 ? newestDateCompare : (b.sortIndex || 0) - (a.sortIndex || 0);
             }
         });
         
@@ -773,7 +787,7 @@ $(document).ready(function() {
                             </div>
                         </div>
                         <p class="podcast-description">${podcast.description}</p>
-                        ${podcast.versionNote ? `<p class="version-note">${podcast.versionNote}</p>` : ''}
+                        ${podcast.versionNote && podcast.versionNote.trim() ? `<p class="version-note">${podcast.versionNote}</p>` : ''}
                     </div>
                     <div class="podcast-meta">
                         <span class="podcast-duration">${durationDisplay}</span>
@@ -855,10 +869,7 @@ $(document).ready(function() {
             saveStateToStorage();
         }
     }
-
-
-
-    // Ensure positions are saved when the page is about to close
+// Ensure positions are saved when the page is about to close
     $(window).on('beforeunload', function() {
         savePlaybackPosition();
     });
@@ -869,17 +880,17 @@ $(document).ready(function() {
     });
 
     // Check timeline progress every minute
-    setInterval(checkTimelineProgress, 60000);
-    
+    setInterval(checkTimelineProgress, 60000);// Check timeline progress every minute
+
     // Keyboard shortcuts
     $(document).on('keydown', function(e) {
         if (!appState.audio) return;
-        
+
         switch(e.key) {
             case ' ':
                 e.preventDefault();
                 togglePlayPause();
-                break;
+                break;se();
             case 'ArrowLeft':
                 e.preventDefault();
                 seekRelative(-15);
@@ -889,5 +900,6 @@ $(document).ready(function() {
                 seekRelative(30);
                 break;
         }
-    });
+    });     
 });
+

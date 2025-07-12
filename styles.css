@@ -427,6 +427,7 @@ body::before {
     box-shadow: 
         0 4px 16px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    min-height: 120px; /* Reduced from default */
 }
 
 .podcast-card:hover {
@@ -488,7 +489,6 @@ body::before {
 .podcast-info {
     color: white;
     padding-right: 50px;
-    padding-bottom: 20px;
 }
 
 .podcast-title {
@@ -1016,6 +1016,7 @@ body::before {
     
     .podcast-card {
         padding: 16px;
+        min-height: 140px; /* Reduced from default */
     }
     
     .podcast-info {
@@ -1083,6 +1084,10 @@ body::before {
     .podcast-duration {
         font-size: 0.7rem;
         padding: 3px 6px;
+    }
+    
+    .podcast-card {
+        min-height: 110px; /* Added explicit mobile height */
     }
 }
 
