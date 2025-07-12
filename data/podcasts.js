@@ -16,7 +16,7 @@ window.podcastData = {
                     "versionId": "galatians-v1",
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
-                        "scholarly": 55,
+                        "scholarly": 57,
                         "moderate": 49,
                         "traditional": 49
                     },
@@ -42,7 +42,7 @@ window.podcastData = {
                     "versionId": "1-thessalonians-v1",
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
-                        "scholarly": 51,
+                        "scholarly": 50,
                         "moderate": 50,
                         "traditional": 50
                     },
@@ -68,7 +68,7 @@ window.podcastData = {
                     "versionId": "1-corinthians-traditional",
                     "perspectives": ["traditional"],
                     "dates": {
-                        "scholarly": 55,
+                        "scholarly": 54,
                         "moderate": 54,
                         "traditional": 54
                     },
@@ -81,7 +81,7 @@ window.podcastData = {
                     "versionId": "1-corinthians-moderate",
                     "perspectives": ["moderate"],
                     "dates": {
-                        "scholarly": 55,
+                        "scholarly": 54,
                         "moderate": 54,
                         "traditional": 54
                     },
@@ -94,7 +94,7 @@ window.podcastData = {
                     "versionId": "1-corinthians-scholarly-v1",
                     "perspectives": ["scholarly"],
                     "dates": {
-                        "scholarly": 55,
+                        "scholarly": 54,
                         "moderate": 54,
                         "traditional": 54
                     },
@@ -107,7 +107,7 @@ window.podcastData = {
                     "versionId": "1-corinthians-scholarly-v2",
                     "perspectives": ["scholarly"],
                     "dates": {
-                        "scholarly": 55,
+                        "scholarly": 54,
                         "moderate": 54,
                         "traditional": 54
                     },
@@ -136,13 +136,26 @@ window.podcastData = {
                     "versionId": "2-corinthians-traditional",
                     "perspectives": ["traditional"],
                     "dates": {
-                        "scholarly": 56,
+                        "scholarly": 55,
                         "moderate": 55,
                         "traditional": 55
                     },
                     "description": "Paul defends his apostolic authority and encourages generous giving while addressing his critics.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
                     "duration": 3900,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "2-corinthians-c",
+                    "perspectives": ["scholarly", "moderate"],
+                    "dates": {
+                        "scholarly": 54,
+                        "moderate": 56,
+                        "traditional": 55
+                    },
+                    "description": "From 2 Corinthians 8, Paul organizes the collection for Jerusalem's poor saints.",
+                    "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
+                    "duration": 750,
                     "versionNote": ""
                 }
             ]
@@ -159,16 +172,16 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "2-corinthians-c",
+                    "versionId": "2-corinthians-d",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 56,
-                        "moderate": 55,
+                        "scholarly": 55,
+                        "moderate": 56,
                         "traditional": 55
                     },
-                    "description": "From 2 Corinthians 8, Paul organizes the collection for Jerusalem's poor saints.",
+                    "description": "From 2 Corinthians 2:14-7:4, Paul describes his ministry of reconciliation and new covenant.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
-                    "duration": 750,
+                    "duration": 2700,
                     "versionNote": ""
                 }
             ]
@@ -188,8 +201,8 @@ window.podcastData = {
                     "versionId": "2-corinthians-d",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 56,
-                        "moderate": 55,
+                        "scholarly": 55,
+                        "moderate": 56,
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 2:14-7:4, Paul describes his ministry of reconciliation and new covenant.",
@@ -214,8 +227,8 @@ window.podcastData = {
                     "versionId": "2-corinthians-e",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 56,
-                        "moderate": 55,
+                        "scholarly": 55,
+                        "moderate": 56,
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 10:1-13:10, Paul confronts the 'super-apostles' and defends his weakness as strength.",
@@ -240,8 +253,8 @@ window.podcastData = {
                     "versionId": "2-corinthians-f",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 56,
-                        "moderate": 55,
+                        "scholarly": 55,
+                        "moderate": 56,
                         "traditional": 55
                     },
                     "description": "From 2 Corinthians 1:1-2:13; 7:5-16; 13:11-13, Paul expresses relief at the Corinthians' repentance and reconciliation.",
@@ -267,8 +280,8 @@ window.podcastData = {
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 57,
-                        "moderate": 56,
-                        "traditional": 56
+                        "moderate": 57,
+                        "traditional": 57
                     },
                     "description": "Paul presents his most systematic theology of salvation, righteousness, and God's plan for Jews and Gentiles.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -292,9 +305,9 @@ window.podcastData = {
                     "versionId": "philippians-traditional",
                     "perspectives": ["traditional"],
                     "dates": {
-                        "scholarly": 62,
-                        "moderate": 60,
-                        "traditional": 60
+                        "scholarly": 54,
+                        "moderate": 61,
+                        "traditional": 61
                     },
                     "description": "Paul writes from prison expressing joy, unity, and gratitude to his beloved Philippian church.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -305,9 +318,9 @@ window.podcastData = {
                     "versionId": "philippians-a",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 62,
-                        "moderate": 60,
-                        "traditional": 60
+                        "scholarly": 54,
+                        "moderate": 61,
+                        "traditional": 61
                     },
                     "description": "From Philippians 4:10-20, Paul writes a brief thank you note for the Philippians' financial support.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -331,9 +344,9 @@ window.podcastData = {
                     "versionId": "philippians-b",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 62,
-                        "moderate": 60,
-                        "traditional": 60
+                        "scholarly": 55,
+                        "moderate": 56,
+                        "traditional": 61
                     },
                     "description": "From Philippians 1:1-3:1; 4:4-9, 21-23, Paul encourages unity and shares the Christ hymn while expressing his circumstances.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -357,9 +370,9 @@ window.podcastData = {
                     "versionId": "philippians-c",
                     "perspectives": ["scholarly", "moderate"],
                     "dates": {
-                        "scholarly": 62,
-                        "moderate": 60,
-                        "traditional": 60
+                        "scholarly": 57,
+                        "moderate": 56,
+                        "traditional": 61
                     },
                     "description": "From Philippians 3:2-4:3, Paul warns against Judaizers and calls believers to press toward the goal.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -383,9 +396,9 @@ window.podcastData = {
                     "versionId": "philemon-v1",
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
-                        "scholarly": 62,
-                        "moderate": 60,
-                        "traditional": 60
+                        "scholarly": 55,
+                        "moderate": 56,
+                        "traditional": 61
                     },
                     "description": "Paul writes a personal letter requesting forgiveness for the runaway slave Onesimus.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -409,7 +422,7 @@ window.podcastData = {
                     "versionId": "colossians-v1",
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
-                        "scholarly": 80,
+                        "scholarly": 85,
                         "moderate": 61,
                         "traditional": 61
                     },
@@ -436,8 +449,8 @@ window.podcastData = {
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 90,
-                        "moderate": 61,
-                        "traditional": 61
+                        "moderate": 62,
+                        "traditional": 62
                     },
                     "description": "Paul describes the mystery of the church as Christ's body and the believer's spiritual blessings.",
                     "audioUrl": "https://www.soundjay.com/misc/sounds/bell-ringing-05.wav",
@@ -461,7 +474,7 @@ window.podcastData = {
                     "versionId": "2-thessalonians-v1",
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
-                        "scholarly": 90,
+                        "scholarly": 85,
                         "moderate": 51,
                         "traditional": 51
                     },
@@ -488,7 +501,7 @@ window.podcastData = {
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 100,
-                        "moderate": 63,
+                        "moderate": 80,
                         "traditional": 63
                     },
                     "description": "Paul instructs his protégé Timothy on church leadership, doctrine, and pastoral care.",
@@ -514,7 +527,7 @@ window.podcastData = {
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 100,
-                        "moderate": 63,
+                        "moderate": 80,
                         "traditional": 63
                     },
                     "description": "Paul gives instructions for establishing church leadership and sound doctrine in Crete.",
@@ -540,7 +553,7 @@ window.podcastData = {
                     "perspectives": ["scholarly", "moderate", "traditional"],
                     "dates": {
                         "scholarly": 100,
-                        "moderate": 64,
+                        "moderate": 80,
                         "traditional": 64
                     },
                     "description": "Paul writes his final letter, charging Timothy to faithfully guard the gospel and endure suffering.",
