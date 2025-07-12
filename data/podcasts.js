@@ -22,7 +22,7 @@ window.podcastData = {
                     },
                     "description": "Paul defends justification by faith and confronts the Judaizers threatening the gospel message.",
                     "audioUrl": "/audio/galatians-v1.mp3",
-                    "duration": 2400,
+                    "duration": 1254,
                     "versionNote": ""
                 }
             ]
@@ -155,7 +155,7 @@ window.podcastData = {
                     },
                     "description": "From 2 Corinthians 8, Paul organizes the collection for Jerusalem's poor saints.",
                     "audioUrl": "/audio/2-corinthians-c.mp3",
-                    "duration": 750,
+                    "duration": 223,
                     "versionNote": ""
                 }
             ]
@@ -181,7 +181,7 @@ window.podcastData = {
                     },
                     "description": "From 2 Corinthians 2:14-7:4, Paul describes his ministry of reconciliation and new covenant.",
                     "audioUrl": "/audio/2-corinthians-d.mp3",
-                    "duration": 2700,
+                    "duration": 715,
                     "versionNote": ""
                 }
             ]
@@ -207,7 +207,7 @@ window.podcastData = {
                     },
                     "description": "From 2 Corinthians 10:1-13:10, Paul confronts the 'super-apostles' and defends his weakness as strength.",
                     "audioUrl": "/audio/2-corinthians-e.mp3",
-                    "duration": 2100,
+                    "duration": 810,
                     "versionNote": ""
                 }
             ]
@@ -298,7 +298,7 @@ window.podcastData = {
                     },
                     "description": "From Philippians 4:10-20, Paul writes a brief thank you note for the Philippians' financial support.",
                     "audioUrl": "/audio/philippians-a.mp3",
-                    "duration": 600,
+                    "duration": 92,
                     "versionNote": ""
                 }
             ]
