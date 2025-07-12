@@ -14,6 +14,7 @@ $(document).ready(function() {
         },
         playedPodcasts: new Set(),
         podcastPositions: {}, // Store position for each podcast version
+        playCounters: {}, // Store play counts for each podcast version
         audio: null,
         datePerspective: 'scholarly', // 'scholarly', 'moderate', 'traditional'
         sortBy: 'newest' // 'newest', 'oldest', 'author', 'title'
@@ -55,6 +56,7 @@ $(document).ready(function() {
                 appState.timeline = savedState.timeline || appState.timeline;
                 appState.playedPodcasts = new Set(savedState.playedPodcasts || []);
                 appState.podcastPositions = savedState.podcastPositions || {};
+                appState.playCounters = savedState.playCounters || {};
                 appState.datePerspective = savedState.datePerspective || 'scholarly';
                 appState.sortBy = savedState.sortBy || 'newest';
                 
@@ -74,6 +76,7 @@ $(document).ready(function() {
             timeline: appState.timeline,
             playedPodcasts: Array.from(appState.playedPodcasts),
             podcastPositions: appState.podcastPositions,
+            playCounters: appState.playCounters,
             datePerspective: appState.datePerspective,
             sortBy: appState.sortBy,
             lastActivePodcast: appState.currentPodcast ? {
@@ -500,6 +503,17 @@ $(document).ready(function() {
     function onAudioEnded() {
         appState.isPlaying = false;
         updatePlayButton();
+        
+        // Increment play counter when audio reaches the end
+        if (appState.currentPodcast) {
+            const versionId = appState.currentPodcast.versionId;
+            appState.playCounters[versionId] = (appState.playCounters[versionId] || 0) + 1;
+            saveStateToStorage();
+            
+            // Update the display immediately
+            renderPodcasts();
+        }
+        
         // Don't auto-play next track - let user decide
     }
 
@@ -745,6 +759,11 @@ $(document).ready(function() {
                 case 'oldest':
                     const oldestDateCompare = a.primaryDate - b.primaryDate;
                     return oldestDateCompare !== 0 ? oldestDateCompare : (a.sortIndex || 0) - (b.sortIndex || 0);
+                case 'plays':
+                    const aPlayCount = appState.playCounters[a.versionId] || 0;
+                    const bPlayCount = appState.playCounters[b.versionId] || 0;
+                    const playCountCompare = aPlayCount - bPlayCount; // Least played first
+                    return playCountCompare !== 0 ? playCountCompare : (a.sortIndex || 0) - (b.sortIndex || 0);
                 case 'newest':
                 default:
                     const newestDateCompare = b.primaryDate - a.primaryDate;
@@ -791,6 +810,7 @@ $(document).ready(function() {
             // Get progress time for this podcast version
             const savedPosition = appState.podcastPositions[podcast.versionId] || 0;
             const durationDisplay = getDurationDisplay(savedPosition, podcast.duration);
+            const playCountDisplay = getPlayCountDisplay(podcast.versionId);
             
             const card = $(`
                 <div class="podcast-card ${playingClass}" 
@@ -817,6 +837,7 @@ $(document).ready(function() {
                         ${podcast.versionNote && podcast.versionNote.trim() ? `<p class="version-note">${podcast.versionNote}</p>` : ''}
                     </div>
                     <div class="podcast-meta">
+                        ${playCountDisplay ? `<div class="play-count">${playCountDisplay}</div>` : ''}
                         <span class="podcast-duration">${durationDisplay}</span>
                     </div>
                 </div>
@@ -870,6 +891,11 @@ $(document).ready(function() {
         
         // Otherwise just show total duration
         return formatTime(totalDuration);
+    }
+
+    function getPlayCountDisplay(versionId) {
+        const playCount = appState.playCounters[versionId] || 0;
+        return playCount > 0 ? `<i class="fas fa-headphones"></i> ${playCount}` : '';
     }
 
     function createCompactAlternativeDisplay(authors, dates, primaryPerspective) {
