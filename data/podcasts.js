@@ -48,7 +48,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes his first letter encouraging the young church and addressing questions about Christ's return.",
                     "audioUrl": "audio/1-thessalonians-v1.mp3",
-                    "duration": 1800,
+                    "duration": 735,
                     "versionNote": ""
                 }
             ]
@@ -74,7 +74,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
                     "audioUrl": "audio/1-corinthians-traditional.mp3",
-                    "duration": 4800,
+                    "duration": 3241,
                     "versionNote": ""
                 },
                 {
@@ -87,7 +87,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
                     "audioUrl": "audio/1-corinthians-moderate.mp3",
-                    "duration": 5100,
+                    "duration": 3241,
                     "versionNote": "with parenthetical tone"
                 },
                 {
@@ -100,7 +100,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
                     "audioUrl": "audio/1-corinthians-scholarly-v1.mp3",
-                    "duration": 4950,
+                    "duration": 3224,
                     "versionNote": "without interpolation"
                 },
                 {
@@ -116,7 +116,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes his second letter addressing divisions, moral issues, and spiritual gifts in the Corinthian church.",
                     "audioUrl": "audio/1-corinthians-scholarly-v2.mp3",
-                    "duration": 4950,
+                    "duration": 3242,
                     "versionNote": "with interpolation"
                 }
             ]
@@ -233,7 +233,7 @@ window.podcastData = {
                     },
                     "description": "From 2 Corinthians 1:1-2:13; 7:5-16; 13:11-13, Paul expresses relief at the Corinthians' repentance and reconciliation.",
                     "audioUrl": "audio/2-corinthians-f.mp3",
-                    "duration": 1650,
+                    "duration": 518,
                     "versionNote": ""
                 }
             ]
@@ -259,7 +259,7 @@ window.podcastData = {
                     },
                     "description": "Paul presents his most systematic theology of salvation, righteousness, and God's plan for Jews and Gentiles.",
                     "audioUrl": "audio/romans-v1.mp3",
-                    "duration": 4800,
+                    "duration": 3540,
                     "versionNote": ""
                 }
             ]
@@ -324,7 +324,7 @@ window.podcastData = {
                     },
                     "description": "From Philippians 1:1-3:1; 4:4-9, 21-23, Paul encourages unity and shares the Christ hymn while expressing his circumstances.",
                     "audioUrl": "audio/philippians-b.mp3",
-                    "duration": 2400,
+                    "duration": 487,
                     "versionNote": ""
                 }
             ]
@@ -350,7 +350,7 @@ window.podcastData = {
                     },
                     "description": "From Philippians 3:2-4:3, Paul warns against Judaizers and calls believers to press toward the goal.",
                     "audioUrl": "audio/philippians-c.mp3",
-                    "duration": 1200,
+                    "duration": 221,
                     "versionNote": ""
                 }
             ]
@@ -376,7 +376,7 @@ window.podcastData = {
                     },
                     "description": "Paul writes a personal letter requesting forgiveness for the runaway slave Onesimus.",
                     "audioUrl": "audio/philemon-v1.mp3",
-                    "duration": 750,
+                    "duration": 180,
                     "versionNote": ""
                 }
             ]
@@ -415,7 +415,7 @@ window.podcastData = {
                     },
                     "description": "Paul confronts false teaching and proclaims the supremacy of Christ over all creation.",
                     "audioUrl": "audio/colossians-scholarly.mp3",
-                    "duration": 3000,
+                    "duration": 753,
                     "versionNote": ""
                 }
             ]
@@ -432,15 +432,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "ephesians-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "ephesians-tradiutional",
+                    "perspectives": ["moderate", "traditional"],
                     "dates": {
                         "scholarly": 90,
                         "moderate": 62,
                         "traditional": 62
                     },
                     "description": "Paul describes the mystery of the church as Christ's body and the believer's spiritual blessings.",
-                    "audioUrl": "audio/ephesians-v1.mp3",
+                    "audioUrl": "audio/ephesians-traditional.mp3",
+                    "duration": 4200,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "ephesians-scholarly",
+                    "perspectives": ["scholarly"],
+                    "dates": {
+                        "scholarly": 90,
+                        "moderate": 62,
+                        "traditional": 62
+                    },
+                    "description": "Paul describes the mystery of the church as Christ's body and the believer's spiritual blessings.",
+                    "audioUrl": "audio/ephesians-scholarly.mp3",
                     "duration": 4200,
                     "versionNote": ""
                 }
@@ -458,15 +471,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "2-thessalonians-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "2-thessalonians-traditional",
+                    "perspectives": ["traditional"],
                     "dates": {
                         "scholarly": 85,
                         "moderate": 51,
                         "traditional": 51
                     },
                     "description": "Paul clarifies teachings about Christ's return and addresses concerns about the Day of the Lord.",
-                    "audioUrl": "audio/2-thessalonians-v1.mp3",
+                    "audioUrl": "audio/2-thessalonians-traditional.mp3",
+                    "duration": 1500,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "2-thessalonians-scholarly",
+                    "perspectives": ["moderate", "scholarly"],
+                    "dates": {
+                        "scholarly": 85,
+                        "moderate": 51,
+                        "traditional": 51
+                    },
+                    "description": "Paul clarifies teachings about Christ's return and addresses concerns about the Day of the Lord.",
+                    "audioUrl": "audio/2-thessalonians-scholarly.mp3",
                     "duration": 1500,
                     "versionNote": ""
                 }
@@ -484,15 +510,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "1-timothy-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "1-timothy-traditional",
+                    "perspectives": ["traditional"],
                     "dates": {
                         "scholarly": 100,
                         "moderate": 80,
                         "traditional": 63
                     },
                     "description": "Paul instructs his protégé Timothy on church leadership, doctrine, and pastoral care.",
-                    "audioUrl": "audio/1-timothy-v1.mp3",
+                    "audioUrl": "audio/1-timothy-traditional.mp3",
+                    "duration": 3600,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "1-timothy-scholarly",
+                    "perspectives": ["moderate", "scholarly"],
+                    "dates": {
+                        "scholarly": 100,
+                        "moderate": 80,
+                        "traditional": 63
+                    },
+                    "description": "Paul instructs his protégé Timothy on church leadership, doctrine, and pastoral care.",
+                    "audioUrl": "audio/1-timothy-scholarly.mp3",
                     "duration": 3600,
                     "versionNote": ""
                 }
@@ -510,15 +549,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "titus-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "titus-traditional",
+                    "perspectives": ["traditional"],
                     "dates": {
                         "scholarly": 100,
                         "moderate": 80,
                         "traditional": 63
                     },
                     "description": "Paul gives instructions for establishing church leadership and sound doctrine in Crete.",
-                    "audioUrl": "audio/titus-v1.mp3",
+                    "audioUrl": "audio/titus-traditional.mp3",
+                    "duration": 1800,
+                    "versionNote": ""
+                }, 
+                {
+                    "versionId": "titus-scholarly",
+                    "perspectives": ["moderate", "scholarly"],
+                    "dates": {
+                        "scholarly": 100,
+                        "moderate": 80,
+                        "traditional": 63
+                    },
+                    "description": "Paul gives instructions for establishing church leadership and sound doctrine in Crete.",
+                    "audioUrl": "audio/titus-scholarly.mp3",
                     "duration": 1800,
                     "versionNote": ""
                 }
@@ -536,15 +588,28 @@ window.podcastData = {
             },
             "versions": [
                 {
-                    "versionId": "2-timothy-v1",
-                    "perspectives": ["scholarly", "moderate", "traditional"],
+                    "versionId": "2-timothy-traditional",
+                    "perspectives": ["moderate", "traditional"],
                     "dates": {
                         "scholarly": 100,
                         "moderate": 80,
                         "traditional": 64
                     },
                     "description": "Paul writes his final letter, charging Timothy to faithfully guard the gospel and endure suffering.",
-                    "audioUrl": "audio/2-timothy-v1.mp3",
+                    "audioUrl": "audio/2-timothy-traditional.mp3",
+                    "duration": 2700,
+                    "versionNote": ""
+                },
+                {
+                    "versionId": "2-timothy-scholarly",
+                    "perspectives": ["scholarly"],
+                    "dates": {
+                        "scholarly": 100,
+                        "moderate": 80,
+                        "traditional": 64
+                    },
+                    "description": "Paul writes his final letter, charging Timothy to faithfully guard the gospel and endure suffering.",
+                    "audioUrl": "audio/2-timothy-scholarly.mp3",
                     "duration": 2700,
                     "versionNote": ""
                 }
